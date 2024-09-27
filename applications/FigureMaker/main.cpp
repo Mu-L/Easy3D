@@ -24,42 +24,36 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  ********************************************************************/
 
-#ifndef EASY3D_UTIL_VERSION_H
-#define EASY3D_UTIL_VERSION_H
+
+#include "viewer.h"
+#include <easy3d/util/initializer.h>
+
+using namespace easy3d;
 
 
-#include <string>
+// This application allows to render a set of (well aligned) models in a grid layout, convenient for making figures.
 
+int main(int argc, char** argv) {
+    // initialize Easy3D.
+    initialize(true, true);
 
-namespace easy3d {
+    // create a 1 by 1 layout by default
+    FigureMaker viewer(1, 1, APP_TITLE);
 
-    /// returns the major version number of Easy3D.
-    int version_major();
+    // usage
+    viewer.set_usage(
+        "Usage:\n"
+        "--------------------------------------\n"
+        "  Ctrl + o: add model(s) to the viewer\n"
+        "  ------------------------------------\n"
+        "  s: snapshot\n"
+        "  ------------------------------------\n"
+        "  f: fit model to screen\n"
+        "  l: toggle lighting\n"
+        "  d: toggle dividing lines\n"
+        "--------------------------------------\n"
+    );
 
-    /// returns the major version number of Easy3D.
-    int version_minor();
-
-    /// returns the minor version number of Easy3D.
-    int version_patch();
-
-    /// returns the version string of Easy3D, in the format [MAJOR].[MINOR].[PATCH], e.g., “2.5.3”.
-    std::string version_string();
-
-    /// returns the version number of Easy3D, in the format 10[MAJOR]0[MINOR]0[PATCH], e.g., 1020503.
-    std::size_t version_number();
-
-    /// returns the release date of Easy3D, in the format YYYYMMDD, e.g., 20240305.
-    std::size_t release_date();
+    // run the viewer
+    return viewer.run();
 }
-
-/// Easy3D version string, in the format [MAJOR].[MINOR].[PATCH], e.g., “2.5.3”.
-#define EASY3D_VERSION_STR Easy3D_VERSION_STRING
-
-/// Easy3D version number, in the format 10[MAJOR]0[MINOR]0[PATCH].
-#define EASY3D_VERSION_NR 1020504
-
-/// Easy3D release date, in the format YYYYMMDD.
-#define EASY3D_RELEASE_DATE 20240927
-
-
-#endif  // EASY3D_UTIL_VERSION_H
